@@ -4,14 +4,12 @@ import { ArrowRight } from '@element-plus/icons-vue'
 
 // do not use same name with ref
 const form = reactive({
-  name: "",
-  region: "",
   date1: "",
   date2: "",
-  delivery: false,
-  type: [],
-  resource: "",
-  desc: ""
+  date3: "",
+  date4: "",
+  date5: "",
+  date6: "",
 });
 
 const onSubmit = () => {
@@ -29,22 +27,22 @@ const onSubmit = () => {
     </el-breadcrumb>
     <el-form :model="form" label-width="120px">
       <el-form-item label="8:00 - 10:00" class="el-form-item--label-left">
-        <el-input v-model="form.name"/>
+        <el-input v-model="form.date1"/>
       </el-form-item>
       <el-form-item label="10:00 - 12:00" class="el-form-item--label-left">
-        <el-input v-model="form.password"/>
+        <el-input v-model="form.date2"/>
       </el-form-item>
       <el-form-item label="8:00 - 10:00" class="el-form-item--label-left">
-        <el-input v-model="form.name"/>
+        <el-input v-model="form.date3"/>
       </el-form-item>
       <el-form-item label="10:00 - 12:00" class="el-form-item--label-left">
-        <el-input v-model="form.password"/>
+        <el-input v-model="form.date4"/>
       </el-form-item>
       <el-form-item label="8:00 - 10:00" class="el-form-item--label-left">
-        <el-input v-model="form.name"/>
+        <el-input v-model="form.date5"/>
       </el-form-item>
       <el-form-item label="10:00 - 12:00" class="el-form-item--label-left">
-        <el-input v-model="form.password"/>
+        <el-input v-model="form.date6"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit" class="login-button">Update</el-button>

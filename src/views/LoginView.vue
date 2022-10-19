@@ -3,14 +3,8 @@ import { reactive } from "vue";
 
 // do not use same name with ref
 const form = reactive({
-  name: "",
-  region: "",
-  date1: "",
-  date2: "",
-  delivery: false,
-  type: [],
-  resource: "",
-  desc: ""
+  email: "",
+  password: "",
 });
 
 const onSubmit = () => {
@@ -23,7 +17,7 @@ const onSubmit = () => {
     <h1 class="greetings">Login</h1>
     <el-form :model="form" label-width="120px">
       <el-form-item label="Email">
-        <el-input v-model="form.name" placeholder="Email" />
+        <el-input v-model="form.email" placeholder="Email" />
       </el-form-item>
       <el-form-item label="Password">
         <el-input v-model="form.password" placeholder="Password" />
