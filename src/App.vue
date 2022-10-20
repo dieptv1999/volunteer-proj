@@ -1,25 +1,50 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import {ElButton} from "element-plus";
+import { RouterLink, RouterView } from "vue-router";
+import HelloWorld from "./components/HelloWorld.vue";
+import { ElButton, ElNotification } from "element-plus";
+import { onMounted } from "vue";
+import axios from "axios";
+import { useInfoStore } from "@/stores/info";
+
+const store = useInfoStore();
+
+onMounted(() => {
+  if (localStorage.getItem("token")) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
+  } else {
+    window.location.replace("/login");
+  }
+
+  store.$subscribe((mutation, state) => {
+    if (state.notification) {
+      ElNotification({
+        title: 'Notification',
+        // @ts-ignore
+        message: state.notification?.message,
+        // @ts-ignore
+        type: state.notification?.type,
+      })
+    }
+  })
+});
 </script>
 
 <template>
-  <header>
-<!--    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
+  <!--  <header>-->
+  <!--&lt;!&ndash;    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />&ndash;&gt;-->
 
-    <div class="wrapper">
-      <HelloWorld msg="GERAK KERJA KESELAMATAN RELA (GKKR)" />
-<!--      <el-button type="primary">Login</el-button>-->
+  <!--    <div class="wrapper">-->
+  <!--      <HelloWorld msg="GERAK KERJA KESELAMATAN RELA (GKKR)" />-->
+  <!--&lt;!&ndash;      <el-button type="primary">Login</el-button>&ndash;&gt;-->
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/list-states">List States</RouterLink>
-        <RouterLink to="/update">Update Form</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <!--      <nav>-->
+  <!--        <RouterLink to="/">Home</RouterLink>-->
+  <!--        <RouterLink to="/login">Login</RouterLink>-->
+  <!--        <RouterLink to="/list-states">List States</RouterLink>-->
+  <!--        <RouterLink to="/update">Update Form</RouterLink>-->
+  <!--      </nav>-->
+  <!--    </div>-->
+  <!--  </header>-->
 
   <RouterView />
 </template>
