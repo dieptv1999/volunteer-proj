@@ -60,8 +60,9 @@ export default defineComponent({
     ...mapState(useInfoStore, ["infoUpdate"])
   },
   methods: {
-    onSubmit() {
-      store.updateDm(this.form.time_slot1, this.form.time_slot2, this.form.time_slot3, this.form.time_slot4, this.form.time_slot5);
+    async onSubmit() {
+      await store.updateDm(this.form.time_slot1, this.form.time_slot2, this.form.time_slot3, this.form.time_slot4, this.form.time_slot5);
+      store.fetchInfoUpdate(this.$route.query.parlimenId, this.$route.query.dunId, this.$route.query.pdmId);
     },
     capitalize
   }

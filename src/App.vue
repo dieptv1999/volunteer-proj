@@ -14,10 +14,10 @@ export default {
       return useRoute().path;
     });
     if (window.localStorage && currentRoute && (currentRoute !== "/")) {
-      if (window.localStorage.getItem("token")) {
+      if (localStorage.token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
       } else {
-        // window.location.href = "";
+        window.location.href = "";
       }
 
       store.$subscribe((mutation, state) => {

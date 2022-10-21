@@ -70,24 +70,33 @@ export const useInfoStore = defineStore("info", {
     },
     async updateDm(time_slot1: Number, time_slot2: Number, time_slot3: Number, time_slot4: Number, time_slot5: Number) {
       try {
-        let bodyFormData = new FormData();
+        // let bodyFormData = new FormData();
         // @ts-ignore
-        bodyFormData.append("id", `${this.infoUpdate?.id}`);
-        bodyFormData.append("time_slot1", `${time_slot1}`);
-        bodyFormData.append("time_slot2", `${time_slot2}`);
-        bodyFormData.append("time_slot3", `${time_slot3}`);
-        bodyFormData.append("time_slot4", `${time_slot4}`);
-        bodyFormData.append("time_slot5", `${time_slot5}`);
-        const data = await axios.post(`api/update-dm`, bodyFormData);
+        // bodyFormData.append("id", `${this.infoUpdate?.id}`);
+        // bodyFormData.append("time_slot1", `${time_slot1}`);
+        // bodyFormData.append("time_slot2", `${time_slot2}`);
+        // bodyFormData.append("time_slot3", `${time_slot3}`);
+        // bodyFormData.append("time_slot4", `${time_slot4}`);
+        // bodyFormData.append("time_slot5", `${time_slot5}`);
+        const data = await axios.patch(`api/attendance/update-dm`,
+          new URLSearchParams({
+            // @ts-ignore
+            id: `${this.infoUpdate?.id}`, //gave the values directly for testing
+            time_slot1: `${time_slot1}`,
+            time_slot2: `${time_slot2}`,
+            time_slot3: `${time_slot3}`,
+            time_slot4: `${time_slot4}`,
+            time_slot5: `${time_slot5}`,
+          }), { headers: { "Content-Type": "application/x-www-form-urlencoded" } });
         // @ts-ignore
         console.log(data);
         if (data.status === 200) {
           console.log("success");
-          this.showNoti('Update successful')
+          this.showNoti("Update successful");
         }
       } catch (error) {
         console.log(error);
-        this.showNoti('Update failed', 'error')
+        this.showNoti("Update failed", "error");
       }
     },
     async updateNegeri(negeri: string) {
@@ -102,7 +111,7 @@ export const useInfoStore = defineStore("info", {
     async updatePdm(pdm: string) {
       this.pdm = pdm;
     },
-    showNoti(message: String, type: String = 'success') {
+    showNoti(message: String, type: String = "success") {
       // @ts-ignore
       this.notification = { message, type };
     },
