@@ -2,36 +2,40 @@
 import { ElButton, ElNotification } from "element-plus";
 import axios from "axios";
 import { useInfoStore } from "@/stores/info";
+import { useRoute } from "vue-router";
+import { computed } from "vue";
 
 
 export default {
   setup() {
     const store = useInfoStore();
+
+    const currentRoute = computed(() => {
+      return useRoute().path;
+    });
+    if (window.localStorage && currentRoute && (currentRoute !== "/")) {
+      if (window.localStorage.getItem("token")) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
+      } else {
+        // window.location.href = "";
+      }
+
+      store.$subscribe((mutation, state) => {
+        if (state.notification) {
+          ElNotification({
+            title: "Notification",
+            message: state.notification?.message,
+            type: state.notification?.type
+          });
+        }
+      });
+    }
     return {
-      store
+      store,
+      currentRoute
     };
   },
   async mounted() {
-    console.log(this.$router.currentRoute, "this.$router.currentRoute");
-    if (this.$router.currentRoute !== "/") {
-      setTimeout(() => {
-        if (window.localStorage.getItem("token")) {
-          axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
-        } else {
-          window.location.replace("/");
-        }
-
-        store.$subscribe((mutation, state) => {
-          if (state.notification) {
-            ElNotification({
-              title: "Notification",
-              message: state.notification?.message,
-              type: state.notification?.type
-            });
-          }
-        });
-      }, 500);
-    }
   }
 };
 </script>
