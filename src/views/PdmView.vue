@@ -21,7 +21,7 @@ export default {
       breadcrumb: [
         { link: "/negeri", text: capitalize(this.$route.query.negeri) || "" },
         {
-          link: `/parlimen?name=${this.$route.query.parlimen}&negeri=${this.negeri}`,
+          link: `/parlimen?name=${this.$route.query.parlimen}&negeri=${this.$route.query.negeri}`,
           text: capitalize(this.$route.query.parlimen) || ""
         },
         {
