@@ -6,6 +6,7 @@ import findKey from "lodash/findKey";
 import isEqual from "lodash/isEqual";
 import { mapState } from "pinia";
 import { useInfoStore } from "../stores/info";
+import { ElNotification } from "element-plus";
 
 const store = useInfoStore();
 
@@ -24,6 +25,13 @@ export default defineComponent({
       form.time_slot3 = state.infoUpdate.time_slot3;
       form.time_slot4 = state.infoUpdate.time_slot4;
       form.time_slot5 = state.infoUpdate.time_slot5;
+      if (state.notification) {
+        ElNotification({
+          title: "Notification",
+          message: state.notification?.message,
+          type: state.notification?.type
+        });
+      }
     });
     return {
       form

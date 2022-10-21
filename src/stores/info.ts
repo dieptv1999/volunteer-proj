@@ -15,7 +15,8 @@ export const useInfoStore = defineStore("info", {
     pdms: [],
     pdm: "",
     infoUpdate: {},
-    notification: undefined
+    notification: undefined,
+    countNoti: 1,
   }),
   getters: {
     getDms(state) {
@@ -119,6 +120,7 @@ export const useInfoStore = defineStore("info", {
     showNoti(message: String, type: String = "success") {
       // @ts-ignore
       this.notification = { message, type };
+      this.countNoti++
     },
     hideNoti() {
       this.notification = undefined;

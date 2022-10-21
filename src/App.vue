@@ -19,16 +19,6 @@ export default {
       } else {
         // window.location.href = "";
       }
-
-      store.$subscribe((mutation, state) => {
-        if (state.notification) {
-          ElNotification({
-            title: "Notification",
-            message: state.notification?.message,
-            type: state.notification?.type
-          });
-        }
-      });
     }
     return {
       store,
