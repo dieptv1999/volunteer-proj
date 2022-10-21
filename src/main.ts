@@ -13,6 +13,7 @@ axios.defaults.baseURL = "http://128.199.195.92";
 axios.defaults.httpAgent = "http://128.199.195.92";
 axios.defaults.httpsAgent = "http://128.199.195.92";
 axios.defaults.proxy = false;
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 const app = createApp(App);
 

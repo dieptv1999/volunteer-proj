@@ -26,11 +26,18 @@ export const useUserStore = defineStore("user", {
         let bodyFormData = new FormData();
         bodyFormData.append("email", email);
         bodyFormData.append("password", password);
-        const resp = await axios.post("api/token", bodyFormData, { headers: { "Content-Type": "multipart/form-data" } });
+        const resp = await axios.post("api/token", bodyFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+          }
+        });
         this.info = resp?.data?.data;
         axios.defaults.headers.common["Authorization"] = `Bearer ${resp?.data?.data?.token}`;
-        localStorage.setItem('token', resp?.data?.data?.token)
-        window.location.href = 'negeri'
+        localStorage.setItem("token", resp?.data?.data?.token);
+        window.location.href = "negeri";
       } catch (error) {
         console.log(error);
       }
