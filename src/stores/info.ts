@@ -25,6 +25,7 @@ export const useInfoStore = defineStore("info", {
   actions: {
     async fetchDms() {
       try {
+        if (!localStorage.token) location.href = '/'
         const data = await axios.get("api/attendance/get-dm");
         // @ts-ignore
         this.dms = map(data.data, o => o.negeri);
@@ -34,6 +35,7 @@ export const useInfoStore = defineStore("info", {
     },
     async fetchParlimens() {
       try {
+        if (!localStorage.token) location.href = '/'
         const data = await axios.get("api/attendance/get-dm/perlis");
         // @ts-ignore
         this.parlimens = data.data;
@@ -43,6 +45,7 @@ export const useInfoStore = defineStore("info", {
     },
     async fetchDuns(id: String) {
       try {
+        if (!localStorage.token) location.href = '/'
         const data = await axios.get(`api/attendance/get-dm/perlis/${id}`);
         // @ts-ignore
         this.duns = data.data;
@@ -52,6 +55,7 @@ export const useInfoStore = defineStore("info", {
     },
     async fetchPdms(id: String, dunId: String) {
       try {
+        if (!localStorage.token) location.href = '/'
         const data = await axios.get(`api/attendance/get-dm/perlis/${id}/${dunId}`);
         // @ts-ignore
         this.pdms = data.data;
@@ -61,6 +65,7 @@ export const useInfoStore = defineStore("info", {
     },
     async fetchInfoUpdate(id: String, dunId: String, pdmId: String) {
       try {
+        if (!localStorage.token) location.href = '/'
         const data = await axios.get(`api/attendance/get-dm/perlis/${id}/${dunId}/${pdmId}`);
         // @ts-ignore
         this.infoUpdate = data.data[0];

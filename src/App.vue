@@ -17,7 +17,7 @@ export default {
       if (localStorage.token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
       } else {
-        window.location.href = "";
+        // window.location.href = "";
       }
 
       store.$subscribe((mutation, state) => {
