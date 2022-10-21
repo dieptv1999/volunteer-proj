@@ -1,32 +1,39 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+<script>
 import { ElButton, ElNotification } from "element-plus";
-import { onMounted } from "vue";
 import axios from "axios";
 import { useInfoStore } from "@/stores/info";
 
-const store = useInfoStore();
 
-onMounted(() => {
-  if (localStorage.getItem("token")) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
-  } else {
-    window.location.replace("/login");
-  }
+export default {
+  setup() {
+    const store = useInfoStore();
+    return {
+      store
+    };
+  },
+  async mounted() {
+    console.log(this.$router.currentRoute, "this.$router.currentRoute");
+    if (this.$router.currentRoute !== "/") {
+      setTimeout(() => {
+        if (window.localStorage.getItem("token")) {
+          axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
+        } else {
+          window.location.replace("/");
+        }
 
-  store.$subscribe((mutation, state) => {
-    if (state.notification) {
-      ElNotification({
-        title: 'Notification',
-        // @ts-ignore
-        message: state.notification?.message,
-        // @ts-ignore
-        type: state.notification?.type,
-      })
+        store.$subscribe((mutation, state) => {
+          if (state.notification) {
+            ElNotification({
+              title: "Notification",
+              message: state.notification?.message,
+              type: state.notification?.type
+            });
+          }
+        });
+      }, 500);
     }
-  })
-});
+  }
+};
 </script>
 
 <template>
