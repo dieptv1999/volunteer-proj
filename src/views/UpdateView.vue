@@ -93,9 +93,9 @@ export default defineComponent({
           <el-input-number v-model="form.time_slot5" size="large" class="input-con" />
         </el-form-item>
       </div>
-      <el-form-item class="container-btn">
+<!--      <el-form-item class="container-btn">-->
         <el-button @click="onSubmit" class="update-button">Update</el-button>
-      </el-form-item>
+<!--      </el-form-item>-->
     </el-form>
   </div>
 </template>
