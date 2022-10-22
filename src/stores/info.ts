@@ -74,7 +74,7 @@ export const useInfoStore = defineStore("info", {
         console.log(error);
       }
     },
-    async updateDm(time_slot1: Number, time_slot2: Number, time_slot3: Number, time_slot4: Number, time_slot5: Number) {
+    async updateDm(id: Number, time_slot1: Number, time_slot2: Number, time_slot3: Number, time_slot4: Number, time_slot5: Number) {
       try {
         // let bodyFormData = new FormData();
         // @ts-ignore
@@ -87,7 +87,7 @@ export const useInfoStore = defineStore("info", {
         const data = await axios.patch(`api/attendance/update-dm`,
           new URLSearchParams({
             // @ts-ignore
-            id: `${this.infoUpdate?.id}`, //gave the values directly for testing
+            id: `${id}`, //gave the values directly for testing
             time_slot1: `${time_slot1}`,
             time_slot2: `${time_slot2}`,
             time_slot3: `${time_slot3}`,
