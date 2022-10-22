@@ -107,6 +107,9 @@ export default defineComponent({
 
 <template>
   <div class="container">
+    <div class="container-header">
+      <el-button @click="logout" type="danger" class="logout-button">Logout</el-button>
+    </div>
     <!--    <div-->
     <!--      class="autocomplete-v1"-->
     <!--    >-->
@@ -149,7 +152,6 @@ export default defineComponent({
       <!--      <el-form-item class="container-btn">-->
       <el-button @click="onSubmit" class="update-button">Update</el-button>
 
-      <el-button @click="logout" class="logout-button">Logout</el-button>
       <!--      </el-form-item>-->
     </el-form>
   </div>
@@ -223,13 +225,9 @@ export default defineComponent({
 }
 
 .logout-button {
-  width: 100%;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
-  font-size: 25px;
-  line-height: 30px;
-  padding: 17px 0px 16px 0px;
   height: auto;
   letter-spacing: 0.08rem;
   margin-top: 20px;
@@ -249,5 +247,10 @@ export default defineComponent({
 .input-con {
   width: 170px;
 }
-
+.container-header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
 </style>
