@@ -59,7 +59,7 @@ export default defineComponent({
       if (this.ID !== -1) {
         await store.updateDm(this.id, this.form.time_slot1, this.form.time_slot2, this.form.time_slot3, this.form.time_slot4, this.form.time_slot5);
       } else {
-        store.showNoti("Select Pdm required!", 'error')
+        store.showNoti("Select Pdm required!", "error");
       }
       // store.fetchInfoUpdate(this.$route.query.parlimenId, this.$route.query.dunId, this.$route.query.pdmId);
     },
@@ -67,7 +67,7 @@ export default defineComponent({
     querySearchAsync(queryString, cb) {
       const results = queryString
         ? this.links.value.filter((e) => e?.E.toLowerCase().includes(queryString.toLowerCase()))
-        : this.links.value
+        : this.links.value;
 
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
@@ -75,8 +75,8 @@ export default defineComponent({
       }, 300 * Math.random());
     },
     handleSelect(item) {
-      this.state = item?.E
-      this.ID = item?.ID
+      this.state = item?.E;
+      this.ID = item?.ID;
       console.log(item?.ID, "item?.ID");
     }
   }
@@ -85,24 +85,25 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <div
-      class="autocomplete-v1"
+    <!--    <div-->
+    <!--      class="autocomplete-v1"-->
+    <!--    >-->
+    <el-autocomplete
+      v-model="state"
+      :fetch-suggestions="querySearchAsync"
+      placeholder="Search Pdm"
+      @select="handleSelect"
+      fit-input-width="true"
+      size="large"
+      class="autocomplete-v2"
     >
-      <el-autocomplete
-        v-model="state"
-        :fetch-suggestions="querySearchAsync"
-        placeholder="Search Pdm"
-        @select="handleSelect"
-        size="large"
-        class="autocomplete-v2"
-      >
-        <template #default="{ item }">
-          <div class="value">{{ item.E }}</div>
-          <div class="link">{{ item.B }}, {{ item.C }}, {{ item.D }}</div>
-        </template>
-      </el-autocomplete>
-    </div>
-    <el-form :model="form" label-width="120px">
+      <template #default="{ item }">
+        <div class="value">{{ item.E }}</div>
+        <div class="link">{{ item.B }}, {{ item.C }}, {{ item.D }}</div>
+      </template>
+    </el-autocomplete>
+    <!--    </div>-->
+    <el-form :model="form" label-width="120px" class="form-v1">
 
       <div class="container-v1">
 
@@ -130,9 +131,13 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.form-v1 {
+  margin-top: 10px;
+}
 .value {
   font-weight: 600;
 }
+
 .link {
   font-size: 11px;
   text-transform: capitalize;
@@ -140,9 +145,12 @@ export default defineComponent({
   line-height: 1.1;
   margin-bottom: 5px;
 }
+
 .autocomplete-v1 {
   margin-bottom: 20px;
-  width: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .autocomplete-v2 {

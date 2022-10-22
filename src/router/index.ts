@@ -44,17 +44,17 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/PdmView.vue')
     },
+    // {
+    //   path: '/update',
+    //   name: 'update',
+    //   // route level code-splitting
+    //   // this generates a separate chunk (About.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => import('../views/UpdateView.vue')
+    // },
     {
       path: '/update',
       name: 'update',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/UpdateView.vue')
-    },
-    {
-      path: '/update-v2',
-      name: 'update-v2',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
