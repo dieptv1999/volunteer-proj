@@ -12,6 +12,10 @@
   min-height: 100vh;
 }
 
+.el-input__inner {
+  text-align: center;
+}
+
 a,
 .green {
   text-decoration: none;

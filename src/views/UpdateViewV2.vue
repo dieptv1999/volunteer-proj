@@ -155,6 +155,7 @@ export default defineComponent({
 
 .autocomplete-v2 {
   width: 100%;
+  text-align: center;
 }
 
 .breadcrumb-v1 {
