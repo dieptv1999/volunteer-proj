@@ -96,6 +96,10 @@ export default defineComponent({
     handleSelect(item) {
       this.state = item?.label;
       this.ID = item?.ID;
+    },
+    logout() {
+      localStorage.clear();
+      this.$router.push('/')
     }
   }
 });
@@ -144,6 +148,8 @@ export default defineComponent({
       </div>
       <!--      <el-form-item class="container-btn">-->
       <el-button @click="onSubmit" class="update-button">Update</el-button>
+
+      <el-button @click="logout" class="logout-button">Logout</el-button>
       <!--      </el-form-item>-->
     </el-form>
   </div>
@@ -214,6 +220,20 @@ export default defineComponent({
   padding: 17px 0px 16px 0px;
   height: auto;
   letter-spacing: 0.08rem;
+}
+
+.logout-button {
+  width: 100%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  padding: 17px 0px 16px 0px;
+  height: auto;
+  letter-spacing: 0.08rem;
+  margin-top: 20px;
+  margin-left: 0;
 }
 
 .container-v1 {
