@@ -64,10 +64,10 @@ export const useInfoStore = defineStore("info", {
         console.log(error);
       }
     },
-    async fetchInfoUpdate(id: String, dunId: String, pdmId: String) {
+    async fetchInfoUpdate(id: String) {
       try {
         if (!localStorage.token) location.href = '/'
-        const data = await axios.get(`api/attendance/get-dm/perlis/${id}/${dunId}/${pdmId}`);
+        const data = await axios.get(`api/attendance/get-dm-by-id/${id}`);
         // @ts-ignore
         this.infoUpdate = data.data[0];
       } catch (error) {

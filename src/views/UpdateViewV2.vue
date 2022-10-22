@@ -21,18 +21,11 @@ export default defineComponent({
       time_slot5: 0
     });
     store.$subscribe((mutation, state) => {
-      // form.time_slot1 = state.infoUpdate.time_slot1;
-      // form.time_slot2 = state.infoUpdate.time_slot2;
-      // form.time_slot3 = state.infoUpdate.time_slot3;
-      // form.time_slot4 = state.infoUpdate.time_slot4;
-      // form.time_slot5 = state.infoUpdate.time_slot5;
-      if (state.notification) {
-        ElNotification({
-          title: "Notification",
-          message: state.notification?.message,
-          type: state.notification?.type
-        });
-      }
+      form.time_slot1 = state.infoUpdate.time_slot1;
+      form.time_slot2 = state.infoUpdate.time_slot2;
+      form.time_slot3 = state.infoUpdate.time_slot3;
+      form.time_slot4 = state.infoUpdate.time_slot4;
+      form.time_slot5 = state.infoUpdate.time_slot5;
     });
     return {
       form
@@ -48,20 +41,32 @@ export default defineComponent({
     };
   },
   mounted() {
-    // store.fetchInfoUpdate(this.$route.query.parlimenId, this.$route.query.dunId, this.$route.query.pdmId);
     this.links.value = json.gkkr_dm;
   },
   computed: {
     // ...mapState(useInfoStore, ["infoUpdate"])
   },
+  watch: {
+    ID(newID, oldId) {
+      if (newID !== -1) {
+        store.fetchInfoUpdate(newID)
+      }
+    }
+  },
   methods: {
     async onSubmit() {
       if (this.ID !== -1) {
-        await store.updateDm(this.id, this.form.time_slot1, this.form.time_slot2, this.form.time_slot3, this.form.time_slot4, this.form.time_slot5);
+        await store.updateDm(this.ID, this.form.time_slot1, this.form.time_slot2, this.form.time_slot3, this.form.time_slot4, this.form.time_slot5);
       } else {
-        store.showNoti("Select Pdm required!", "error");
+        (() => {
+          ElNotification({
+            title: "Notification",
+            message: state.notification?.message,
+            type: state.notification?.type
+          });
+        })()
       }
-      // store.fetchInfoUpdate(this.$route.query.parlimenId, this.$route.query.dunId, this.$route.query.pdmId);
+      store.fetchInfoUpdate(this.ID);
     },
     capitalize,
     querySearchAsync(queryString, cb) {
@@ -98,7 +103,7 @@ export default defineComponent({
       class="autocomplete-v2"
     >
       <template #default="{ item }">
-        <div class="value">{{ item.E }}</div>
+        <div class="value">{{ item.E }} - {{item.ID}}</div>
         <div class="link">{{ item.B }}, {{ item.C }}, {{ item.D }}</div>
       </template>
     </el-autocomplete>
