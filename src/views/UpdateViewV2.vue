@@ -76,11 +76,11 @@ export default defineComponent({
 
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
-        cb(results);
+        cb(results.map(o => ({...o, label: `${o.E} - ${o.ID}`})));
       }, 300 * Math.random());
     },
     handleSelect(item) {
-      this.state = item?.E;
+      this.state = item?.label;
       this.ID = item?.ID;
       console.log(item?.ID, "item?.ID");
     }
@@ -103,7 +103,7 @@ export default defineComponent({
       class="autocomplete-v2"
     >
       <template #default="{ item }">
-        <div class="value">{{ item.E }} - {{item.ID}}</div>
+        <div class="value">{{ item.label }}</div>
         <div class="link">{{ item.B }}, {{ item.C }}, {{ item.D }}</div>
       </template>
     </el-autocomplete>
