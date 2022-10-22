@@ -74,6 +74,9 @@ export const useInfoStore = defineStore("info", {
         console.log(error);
       }
     },
+    async defaultInfoUpdate() {
+      this.infoUpdate = {}
+    },
     async updateDm(id: Number, time_slot1: Number, time_slot2: Number, time_slot3: Number, time_slot4: Number, time_slot5: Number) {
       try {
         // let bodyFormData = new FormData();

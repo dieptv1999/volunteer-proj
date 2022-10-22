@@ -49,22 +49,29 @@ export default defineComponent({
   watch: {
     ID(newID, oldId) {
       if (newID !== -1) {
-        store.fetchInfoUpdate(newID)
+        store.fetchInfoUpdate(newID);
       }
     }
   },
   methods: {
     async onSubmit() {
-      if (this.ID !== -1) {
+      if (this.ID !== -1 && this.ID !== '-1') {
         await store.updateDm(this.ID, this.form.time_slot1, this.form.time_slot2, this.form.time_slot3, this.form.time_slot4, this.form.time_slot5);
+        (() => {
+          ElNotification({
+            title: "Notification",
+            message: "Update successful",
+            type: "success"
+          });
+        })();
       } else {
         (() => {
           ElNotification({
             title: "Notification",
-            message: state.notification?.message,
-            type: state.notification?.type
+            message: "Select Pdm required",
+            type: "error"
           });
-        })()
+        })();
       }
       store.fetchInfoUpdate(this.ID);
     },
@@ -76,13 +83,19 @@ export default defineComponent({
 
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
-        cb(results.map(o => ({...o, label: `${o.E} - ${o.ID}`})));
+        cb(results.map(o => ({ ...o, label: `${o.E} - ${o.ID}` })));
       }, 300 * Math.random());
+      this.ID = -1;
+      this.state.value = "";
+      form.time_slot1 = 0;
+      form.time_slot2 = 0;
+      form.time_slot3 = 0;
+      form.time_slot4 = 0;
+      form.time_slot5 = 0;
     },
     handleSelect(item) {
       this.state = item?.label;
       this.ID = item?.ID;
-      console.log(item?.ID, "item?.ID");
     }
   }
 });
@@ -101,6 +114,7 @@ export default defineComponent({
       fit-input-width="true"
       size="large"
       class="autocomplete-v2"
+      clearable="true"
     >
       <template #default="{ item }">
         <div class="value">{{ item.label }}</div>
@@ -139,6 +153,7 @@ export default defineComponent({
 .form-v1 {
   margin-top: 10px;
 }
+
 .value {
   font-weight: 600;
 }

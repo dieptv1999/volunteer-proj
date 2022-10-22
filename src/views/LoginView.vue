@@ -20,7 +20,7 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
     if (valid) {
       store.login(form.email, form.password);
     } else {
-      console.log("error submit!", fields);
+      // console.log("error submit!", fields);
     }
   });
 };
