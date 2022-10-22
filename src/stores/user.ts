@@ -37,7 +37,7 @@ export const useUserStore = defineStore("user", {
         this.info = resp?.data?.data;
         axios.defaults.headers.common["Authorization"] = `Bearer ${resp?.data?.data?.token}`;
         localStorage.setItem("token", resp?.data?.data?.token);
-        window.location.href = "update-v2";
+        window.location.href = "update";
       } catch (error) {
         console.log(error);
       }
